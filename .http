@@ -1,0 +1,53 @@
+GET http://localhost:5555/api/agendamento
+
+###
+POST http://localhost:5555/api/agendamento
+Content-Type: application/json
+
+{
+  "professionalId": 2,
+  "startTime": "2024-03-25T14:00:00.000Z",
+  "endTime": "2024-03-25T14:30:00.000Z",
+  "date": "2024-03-25T14:00:00.000Z",
+  "clientName": "João Silva",
+  "customerPhone": "+55 11 98765-4321",
+  "service": "Consulta de Nutrição"
+}
+
+###
+POST  http://localhost:5555/api/disponibilidade HTTP/1.1
+Content-Type: application/json
+
+{
+  "professionalId": 2,
+  "availableDates": [
+  "2024-03-25T10:00:00.000Z",
+  "2024-03-25T14:00:00.000Z",
+  "2024-03-26T09:30:00.000Z"
+  ]
+}
+###
+
+// @name Disponibilidade
+GET  http://localhost:5555/api/disponibilidade HTTP/1.1
+###
+
+// @name Profissional
+GET  http://localhost:5555/api/profissional HTTP/1.1
+
+###
+POST  http://localhost:5555/api/profissional HTTP/1.1
+Content-Type: application/json
+
+{
+   "name": "Teste Profissional",
+   "companyId": 1
+}
+
+###
+POST  http://localhost:5555/api/company HTTP/1.1
+Content-Type: application/json
+
+{
+   "name": "Teste Company",
+}

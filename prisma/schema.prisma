@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id            Int            @id @default(autoincrement())
+  name          String
+  professionals Professional[]
+}
+
+model Professional {
+  id             Int               @id @default(autoincrement())
+  name           String
+  companyId      Int
+  company        Company           @relation(fields: [companyId], references: [id])
+  availabilities Agendamento[]
+  appointments   Disponibilidade[]
+
+  @@map("professional")
+}
+
+model Disponibilidade {
+  id             Int          @id @default(autoincrement())
+  professionalId Int
+  dayOfWeek      Int // 0 = Domingo, 1 = Segunda...
+  startTime      String // "09:00"
+  endTime        String // "12:00"
+  professional   Professional @relation(fields: [professionalId], references: [id])
+
+  @@map("disponibilidade")
+}
+
+model Agendamento {
+  id             Int          @id @default(autoincrement())
+  professionalId Int
+  clientName     String
+  date           DateTime
+  startTime      String
+  endTime        String
+  professional   Professional @relation(fields: [professionalId], references: [id])
+
+  @@map("agendamento")
+}
