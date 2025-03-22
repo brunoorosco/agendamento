@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
-    "start:dev": "tsx watch src/server.ts"
+    "start:dev": "tsx watch src/server.ts",
+    "db:migrate": "npx prisma migrate dev",
+    "db:deploy": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^6.5.0",
